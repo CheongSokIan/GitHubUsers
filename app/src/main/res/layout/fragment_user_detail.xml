@@ -177,6 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="24dp"
+            android:textColor="@color/badge_background"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintBottom_toBottomOf="@id/image_blog"
             app:layout_constraintEnd_toEndOf="parent"

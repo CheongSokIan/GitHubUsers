@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitHubUsers</string>
+    <string name="app_name">GitHub Users</string>
 
     <string name="list_title">Users</string>
     <string name="badge_name">STAFF</string>
