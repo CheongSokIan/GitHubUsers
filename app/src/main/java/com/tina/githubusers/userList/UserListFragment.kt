@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tina.githubusers.databinding.FragmentUserListBinding
 
-class UserListFragment: Fragment() {
+class UserListFragment : Fragment() {
 
     private var _binding: FragmentUserListBinding? = null
     private val binding = _binding!!
+
+    private val adapter by lazy { UserListAdapter() }
 
 
     override fun onCreateView(
@@ -19,6 +21,10 @@ class UserListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUserListBinding.inflate(inflater, container, false)
+
+        binding.apply {
+            recyclerViewList.adapter = adapter
+        }
 
         return _binding!!.root
     }
