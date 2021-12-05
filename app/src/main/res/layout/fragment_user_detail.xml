@@ -9,6 +9,7 @@
         android:id="@+id/image_close"
         android:layout_width="?actionBarSize"
         android:layout_height="?actionBarSize"
+        android:background="?selectableItemBackgroundBorderless"
         android:scaleType="center"
         android:src="@drawable/icon_close_24dp"
         app:layout_constraintStart_toStartOf="parent"

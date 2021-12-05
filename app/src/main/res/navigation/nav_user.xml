@@ -9,8 +9,8 @@
         android:name="com.tina.githubusers.userList.UserListFragment"
         android:label="UserListFragment" >
         <argument
-            android:name="userId"
-            app:argType="long" />
+            android:name="username"
+            app:argType="string" />
         <action
             android:id="@+id/action_userListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />

@@ -2,6 +2,7 @@ package com.tina.githubusers.data
 
 import com.tina.githubusers.api.GitHubService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
 class UserRepository(private val service: GitHubService, private val userDao: UserDao) {
@@ -13,11 +14,22 @@ class UserRepository(private val service: GitHubService, private val userDao: Us
         }
     }
 
-    suspend fun getTargetUser(userId: String) =
-        withContext(Dispatchers.IO) { userDao.getUser(userId) }
+    suspend fun getTargetUser(login: String): User {
+        return withContext(Dispatchers.IO) {
+            updateUser(login)
+            userDao.getUser(login)
+        }
+    }
+
+    private suspend fun updateUser(login: String) {
+        coroutineScope {
+            val result = service.getUser(login)
+            userDao.updateUser(result)
+        }
+    }
 
     private suspend fun fetchUserData(since: Int, perPage: Int) {
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             val result = service.getUserList(since, perPage)
             userDao.insert(result)
         }

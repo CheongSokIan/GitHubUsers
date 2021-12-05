@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -21,6 +22,10 @@ interface GitHubService {
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
     ): List<User>
+
+    @Headers(HEADERS)
+    @GET("users/{username}")
+    suspend fun getUser(@Path("username") username: String): User
 
 
     companion object {
