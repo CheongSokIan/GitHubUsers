@@ -22,11 +22,4 @@ class UserRepository(private val service: GitHubService, private val userDao: Us
             userDao.insert(result)
         }
     }
-
-
-    companion object {
-        fun getInstance(service: GitHubService, userDao: UserDao): UserRepository {
-            return UserRepository(service, userDao)
-        }
-    }
 }
