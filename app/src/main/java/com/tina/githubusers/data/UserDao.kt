@@ -10,7 +10,7 @@ import androidx.room.Query
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user: User)
+    suspend fun insert(users: List<User>)
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
     suspend fun getUserList(): List<User>
