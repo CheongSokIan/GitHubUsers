@@ -19,7 +19,7 @@ interface GitHubService {
     @Headers(HEADERS)
     @GET("users")
     suspend fun getUserList(
-        @Query("since") since: Int,
+        @Query("since") since: Long,
         @Query("per_page") perPage: Int
     ): List<User>
 

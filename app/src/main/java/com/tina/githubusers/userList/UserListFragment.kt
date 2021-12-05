@@ -17,7 +17,7 @@ class UserListFragment : Fragment(), UserListContract.View {
     private var _binding: FragmentUserListBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter by lazy { UserListAdapter() }
+    private val adapter by lazy { UserListAdapter { id -> loadMoreData(id) } }
 
     private lateinit var presenter: UserListPresenter
 
@@ -40,12 +40,19 @@ class UserListFragment : Fragment(), UserListContract.View {
         super.onStart()
         lifecycleScope.launch {
             binding.progressCircular.isVisible = true
-            presenter.loadUserList(0, 100)
+            presenter.loadUserList(0)
         }
     }
 
     override fun showUserList(users: List<User>) {
         binding.progressCircular.isVisible = false
         adapter.submitList(users)
+    }
+
+
+    private fun loadMoreData(id: Long) {
+        lifecycleScope.launch {
+            presenter.loadUserList(id)
+        }
     }
 }

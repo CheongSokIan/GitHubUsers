@@ -11,6 +11,6 @@ interface UserListContract {
 
     interface Presenter {
 
-        suspend fun loadUserList(since: Int, perPage: Int)
+        suspend fun loadUserList(since: Long)
     }
 }

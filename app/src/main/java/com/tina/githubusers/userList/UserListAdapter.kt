@@ -8,7 +8,7 @@ import com.tina.githubusers.data.User
 import com.tina.githubusers.databinding.ListItemUserBinding
 
 
-class UserListAdapter : ListAdapter<User, UserListViewHolder>(UserDiffCallback) {
+class UserListAdapter(private val loadMore: (id: Long) -> Unit) : ListAdapter<User, UserListViewHolder>(UserDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         return UserListViewHolder(
             ListItemUserBinding.inflate(
@@ -20,7 +20,12 @@ class UserListAdapter : ListAdapter<User, UserListViewHolder>(UserDiffCallback) 
     }
 
     override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
-        holder.bindTo(getItem(position))
+        val user = getItem(position)
+        holder.bindTo(user)
+
+        if (itemCount - position == 1) {
+            loadMore(user.id)
+        }
     }
 }
 
