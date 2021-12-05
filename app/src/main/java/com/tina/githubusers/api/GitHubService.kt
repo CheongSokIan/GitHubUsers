@@ -1,8 +1,9 @@
 package com.tina.githubusers.api
 
+
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.tina.githubusers.data.Users
+import com.tina.githubusers.data.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,7 +20,7 @@ interface GitHubService {
     suspend fun getUserList(
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
-    ): List<Users>
+    ): List<User>
 
 
     companion object {
