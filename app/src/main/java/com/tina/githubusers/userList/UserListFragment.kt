@@ -45,8 +45,9 @@ class UserListFragment : Fragment(), UserListContract.View {
     }
 
     override fun showUserList(users: List<User>) {
-        binding.progressCircular.isVisible = false
-        adapter.submitList(users)
+        adapter.submitList(users) {
+            binding.progressCircular.isVisible = false
+        }
     }
 
 

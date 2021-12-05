@@ -9,26 +9,26 @@ class UserRepository(private val service: GitHubService, private val userDao: Us
 
     suspend fun getUserList(since: Long): List<User> {
         return withContext(Dispatchers.IO) {
-            fetchUserData(since)
-            userDao.getUserList()
+            userDao.getUserList(since, PER_PAGE) ?: getUserListFromRemote(since)
         }
     }
 
     suspend fun getTargetUser(login: String): User {
         return withContext(Dispatchers.IO) {
-            updateUser(login)
-            userDao.getUser(login)
+            userDao.getUser(login) ?: getUserFromRemote(login)
         }
     }
 
-    private suspend fun updateUser(login: String) {
+    private suspend fun getUserFromRemote(login: String): User {
         val result = service.getUser(login)
         userDao.updateUser(result)
+        return result
     }
 
-    private suspend fun fetchUserData(since: Long) {
+    private suspend fun getUserListFromRemote(since: Long): List<User> {
         val result = service.getUserList(since, PER_PAGE)
         userDao.insert(result)
+        return result
     }
 
 
