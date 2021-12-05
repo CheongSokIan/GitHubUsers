@@ -13,7 +13,8 @@ class UserRepository(private val service: GitHubService, private val userDao: Us
         }
     }
 
-    suspend fun getTargetUser(userId: String) = withContext(Dispatchers.IO) { userDao.getUser(userId) }
+    suspend fun getTargetUser(userId: String) =
+        withContext(Dispatchers.IO) { userDao.getUser(userId) }
 
     private suspend fun fetchUserData(since: Int, perPage: Int) {
         withContext(Dispatchers.IO) {
