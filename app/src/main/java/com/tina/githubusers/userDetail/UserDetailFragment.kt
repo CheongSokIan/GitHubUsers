@@ -22,4 +22,8 @@ class UserDetailFragment: Fragment() {
 
         return _binding!!.root
     }
+
+    companion object {
+        const val ARG_USER_ID = "ARG_USER_ID"
+    }
 }

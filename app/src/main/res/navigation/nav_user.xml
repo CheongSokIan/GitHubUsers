@@ -7,5 +7,16 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.tina.githubusers.userList.UserListFragment"
-        android:label="UserListFragment" />
+        android:label="UserListFragment" >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_userListFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.tina.githubusers.userDetail.UserDetailFragment"
+        android:label="UserDetailFragment" />
 </navigation>
