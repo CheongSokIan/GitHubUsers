@@ -11,4 +11,6 @@
     <color name="badge_background">#4267B2</color>
     <color name="divider">#E5E5E5</color>
     <color name="icon_color">#646464</color>
+    <color name="primary_color">#4C4E59</color>
+    <color name="primary_dark">#27282E</color>
 </resources>

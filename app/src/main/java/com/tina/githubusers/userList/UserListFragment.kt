@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.tina.githubusers.Injection
@@ -28,7 +29,7 @@ class UserListFragment : Fragment(), UserListContract.View {
     ): View {
         _binding = FragmentUserListBinding.inflate(inflater, container, false)
 
-        presenter = UserListPresenter(this, Injection.provideUserRepository(requireContext().applicationContext))
+        presenter = UserListPresenter(this, Injection.provideUserRepository(requireContext()))
 
         binding.recyclerViewList.adapter = adapter
 
@@ -37,16 +38,14 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     override fun onStart() {
         super.onStart()
-        refresh()
+        lifecycleScope.launch {
+            binding.progressCircular.isVisible = true
+            presenter.loadUserList(0, 100)
+        }
     }
 
     override fun showUserList(users: List<User>) {
+        binding.progressCircular.isVisible = false
         adapter.submitList(users)
-    }
-
-    private fun refresh() {
-        lifecycleScope.launch {
-            presenter.loadUserList(0, 100)
-        }
     }
 }
