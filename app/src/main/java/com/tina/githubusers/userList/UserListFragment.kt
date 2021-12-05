@@ -1,6 +1,7 @@
 package com.tina.githubusers.userList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,14 +39,13 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     override fun onStart() {
         super.onStart()
-        lifecycleScope.launch {
-            binding.progressCircular.isVisible = true
-            presenter.loadUserList(0)
-        }
+        loadMoreData(0)
     }
 
     override fun showUserList(users: List<User>) {
-        adapter.submitList(users) {
+        // In order to trigger DiffCallback update list, create a new list everytime
+        val newList = users.toList()
+        adapter.submitList(newList) {
             binding.progressCircular.isVisible = false
         }
     }
@@ -53,6 +53,7 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     private fun loadMoreData(id: Long) {
         lifecycleScope.launch {
+            binding.progressCircular.isVisible = true
             presenter.loadUserList(id)
         }
     }

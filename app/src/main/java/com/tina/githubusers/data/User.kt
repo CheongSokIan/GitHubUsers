@@ -17,5 +17,6 @@ data class User(
     val name: String? = null,
     val location: String? = null,
     val bio: String? = null,
-    val blog: String? = null
+    val blog: String? = null,
+    var isDetailSynced: Boolean = false
 )
