@@ -1,5 +1,5 @@
 # GitHub Users
-Android Exercise for test
+Android exercise for test
 
 ## App 內容
 - <b>User 列表</b>︰顯示 User 清單，每次會跟據 User Id 再取 20 個資料進行顯示
