@@ -10,4 +10,5 @@
 
     <color name="badge_background">#4267B2</color>
     <color name="divider">#E5E5E5</color>
+    <color name="icon_color">#646464</color>
 </resources>
