@@ -1,5 +1,6 @@
 package com.tina.githubusers.data
 
+
 import com.tina.githubusers.api.GitHubService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -9,7 +10,8 @@ class UserRepository(private val service: GitHubService, private val userDao: Us
 
     suspend fun getUserList(since: Long): List<User> {
         return withContext(Dispatchers.IO) {
-            userDao.getUserList(since, PER_PAGE) ?: getUserListFromRemote(since)
+            getUserListFromRemote(since)
+            userDao.getUserList()
         }
     }
 
