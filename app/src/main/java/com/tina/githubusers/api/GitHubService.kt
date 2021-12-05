@@ -27,8 +27,16 @@ interface GitHubService {
         private const val BASE_URL = "https://api.github.com/"
         private const val HEADERS = "accept: application/vnd.github.v3+json"
 
+        @Volatile
+        private var instance: GitHubService? = null
 
-        fun create(): GitHubService {
+        fun getInstance(): GitHubService {
+            return instance ?: synchronized(this) {
+                instance ?: create().also { instance = it }
+            }
+        }
+
+        private fun create(): GitHubService {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
             val client = OkHttpClient.Builder()
