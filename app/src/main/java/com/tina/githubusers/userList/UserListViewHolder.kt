@@ -13,10 +13,12 @@ import com.tina.githubusers.userDetail.UserDetailFragment
 class UserListViewHolder(private val binding: ListItemUserBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bindTo(user: User) {
+    fun bindTo(user: User, number: Int) {
         binding.apply {
             textLoginName.text = user.login
             textStaffBadge.isVisible = user.isAdmin
+            textItemNumber.text = number.toString()
+
 
             Glide.with(imageAvatar.context)
                 .load(user.avatarUrl)

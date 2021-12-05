@@ -21,7 +21,8 @@ class UserListAdapter(private val loadMore: (id: Long) -> Unit) : ListAdapter<Us
 
     override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
         val user = getItem(position)
-        holder.bindTo(user)
+        val numberOfItem = position + 1
+        holder.bindTo(user, numberOfItem)
 
         if (itemCount - position == 1) {
             loadMore(user.id)
